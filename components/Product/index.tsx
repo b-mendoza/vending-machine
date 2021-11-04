@@ -5,7 +5,10 @@ import { useBoolean } from 'hooks/useBoolean';
 
 import { NormalizedProduct } from 'typings/product';
 
-type ProductProps = Omit<NormalizedProduct, 'id'>;
+type ProductProps = NormalizedProduct & {
+  onPrepare?: (productId: string) => void;
+};
+
 
 function Product({ name, preparationTime }: ProductProps) {
   return (
