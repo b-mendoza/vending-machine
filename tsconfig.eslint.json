@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": true,
+    "noEmit": true
+  },
+  "extends": "./tsconfig.json",
+  "include": [".eslintrc.js", "next.config.js"]
+}
