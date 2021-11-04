@@ -1,7 +1,11 @@
+import Product from 'components/Product';
+
 import { useEffect, useState } from 'react';
 import useSWR from 'swr';
 
-import { Product } from 'typings/product';
+import { StyledMachineWrapper } from 'styles/shared';
+
+import { NormalizedProduct } from 'typings/product';
 import { APIResponse } from 'typings/shared';
 
 type ProductList = (Omit<Product, 'preparation_time'> & {
