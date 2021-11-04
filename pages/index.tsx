@@ -1,9 +1,9 @@
-import Product from 'components/Product';
-
 import { useEffect, useState } from 'react';
 import useSWR from 'swr';
 
-import { StyledMachineWrapper } from 'styles/shared';
+import Product from 'components/Product';
+
+import { StyledContainer, StyledMachineWrapper } from 'theme/shared';
 
 import { NormalizedProduct } from 'typings/product';
 import { APIResponse } from 'typings/shared';
@@ -21,11 +21,7 @@ function Home() {
     const normalizedProductList = response.data.map((product) => {
       const { preparation_time, ...productData } = product;
 
-      return {
-        ...productData,
-        isAvailable: true,
-        preparationTime: preparation_time,
-      };
+      return { ...productData, preparationTime: preparation_time };
     });
 
     setProductList(normalizedProductList);
@@ -35,12 +31,20 @@ function Home() {
 
   if (!response) return <h1>Loading . . .</h1>;
 
+  const handlePrepare = (productId: string) => {
+    console.log({ productId });
+  };
+
   return (
-    <StyledMachineWrapper>
-      {productList.map((product) => (
-        <Product key={product.id} {...product} />
-      ))}
-    </StyledMachineWrapper>
+    <StyledContainer>
+      <h1>Vending Machine</h1>
+
+      <StyledMachineWrapper>
+        {productList.map((product) => (
+          <Product key={product.id} {...product} onPrepare={handlePrepare} />
+        ))}
+      </StyledMachineWrapper>
+    </StyledContainer>
   );
 }
 
