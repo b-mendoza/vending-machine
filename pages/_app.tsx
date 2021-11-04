@@ -12,10 +12,12 @@ type CustomAppProps<CPP = CustomPageProps> = Omit<
   keyof CPP
 > & { pageProps: CPP };
 
-export default function __NextApp({ Component, pageProps }: CustomAppProps) {
+function __NextApp({ Component, pageProps }: CustomAppProps) {
   return (
     <SWRConfig value={{ fetcher }}>
       <Component {...pageProps} />
     </SWRConfig>
   );
 }
+
+export default __NextApp;
