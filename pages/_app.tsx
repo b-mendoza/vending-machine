@@ -1,8 +1,14 @@
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
+import 'styles/main.css';
 
-function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+import type { AppProps as NextJSAppProps } from 'next/app';
+
+import { CustomPageProps } from 'typings/shared';
+
+type CustomAppProps<CPP = CustomPageProps> = Omit<
+  NextJSAppProps<CPP>,
+  keyof CPP
+> & { pageProps: CPP };
+
+export default function __NextApp({ Component, pageProps }: CustomAppProps) {
+  return <Component {...pageProps} />;
 }
-
-export default MyApp
