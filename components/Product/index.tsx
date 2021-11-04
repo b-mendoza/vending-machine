@@ -9,13 +9,44 @@ type ProductProps = NormalizedProduct & {
   onPrepare?: (productId: string) => void;
 };
 
+function Product({
+  id,
+  name,
+  preparationTime,
+  thumbnail,
+  onPrepare,
+}: ProductProps) {
+  const [isBeingPrepared, setIsBeingPrepared] = useBoolean({
+    initialState: false,
+  });
 
-function Product({ name, preparationTime }: ProductProps) {
+  const handlePrepare = () => {
+    if (onPrepare && typeof onPrepare === 'function') {
+      setIsBeingPrepared.setTrue();
+
+      setTimeout(() => {
+        setIsBeingPrepared.setFalse();
+      }, preparationTime * 1000);
+
+      onPrepare(id);
+    }
+  };
+
   return (
     <article>
-      <h1>{name}</h1>
+      <Image
+        alt={name}
+        height={240}
+        layout="responsive"
+        objectFit="contain"
+        priority
+        src={thumbnail}
+        width={240}
+      />
 
-      <p>{preparationTime}</p>
+      <Button block loading={isBeingPrepared} onClick={handlePrepare}>
+        {name}
+      </Button>
     </article>
   );
 }
