@@ -2,10 +2,11 @@
   "name": "focus-test",
   "private": true,
   "scripts": {
-    "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "dev": "next dev",
+    "lint": "next lint",
+    "lint:ts": "tsc",
+    "start": "next start"
   },
   "dependencies": {
     "@emotion/react": "^11.5.0",
