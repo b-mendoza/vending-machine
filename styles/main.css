@@ -1,6 +1,6 @@
 @import url('~@fontsource/inter/variable.css');
 
-@import url('./normalize.css');
+@import url('~antd/dist/antd.css');
 
 html {
   box-sizing: border-box;
