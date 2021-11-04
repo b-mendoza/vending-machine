@@ -8,17 +8,12 @@ import { StyledMachineWrapper } from 'styles/shared';
 import { NormalizedProduct } from 'typings/product';
 import { APIResponse } from 'typings/shared';
 
-type ProductList = (Omit<Product, 'preparation_time'> & {
-  isAvailable: boolean;
-  preparationTime: number;
-})[];
-
-export default function Home() {
+function Home() {
   const { data: response, error } = useSWR<APIResponse, Error>(
     process.env.API_URL,
   );
 
-  const [productList, setProductList] = useState<ProductList>([]);
+  const [productList, setProductList] = useState<NormalizedProduct[]>([]);
 
   useEffect(() => {
     if (!response?.data) return;
@@ -40,5 +35,13 @@ export default function Home() {
 
   if (!response) return <h1>Loading . . .</h1>;
 
-  return <div>{JSON.stringify(productList, null, 2)}</div>;
+  return (
+    <StyledMachineWrapper>
+      {productList.map((product) => (
+        <Product key={product.id} {...product} />
+      ))}
+    </StyledMachineWrapper>
+  );
 }
+
+export default Home;
