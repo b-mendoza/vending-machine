@@ -1,5 +1,4 @@
 export type NormalizedProduct = Omit<Product, 'preparation_time'> & {
-  isAvailable: boolean;
   preparationTime: number;
 };
 
