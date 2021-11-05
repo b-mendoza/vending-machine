@@ -2,9 +2,10 @@ import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import useSWR from 'swr';
 
+import SkeletonProduct from 'components/Skeletons/SkeletonProduct';
 import VendingMachine from 'components/VendingMachine';
 
-import { StyledContainer } from 'theme/shared';
+import { StyledContainer, StyledMachineWrapper } from 'theme/shared';
 
 import { NormalizedProduct } from 'typings/product';
 import { APIResponse } from 'typings/shared';
@@ -46,7 +47,15 @@ function Home() {
           <title>Focus - Vending Machine</title>
         </Head>
 
-        <h1>Loading . . .</h1>
+        <StyledContainer>
+          <h1>Vending Machine</h1>
+
+          <StyledMachineWrapper>
+            {new Array<null>(8).fill(null).map((_, index) => (
+              <SkeletonProduct key={index} />
+            ))}
+          </StyledMachineWrapper>
+        </StyledContainer>
       </>
     );
 
