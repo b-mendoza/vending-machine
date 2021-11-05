@@ -6,6 +6,10 @@ module.exports = {
   env: {
     API_URL: 'https://vending-machine-test.vercel.app/api/products',
   },
+  i18n: {
+    defaultLocale: 'en-US',
+    locales: ['en-US'],
+  },
   images: {
     domains: [
       'assets.epicurious.com',
