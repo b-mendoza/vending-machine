@@ -1,8 +1,8 @@
 import Product from 'components/Product';
 
-import { NormalizedProduct } from 'typings/product';
+import { StyledMachineWrapper } from 'theme/shared';
 
-import { StyledMachineWrapper } from './styled';
+import { NormalizedProduct } from 'typings/product';
 
 type VendingMachineProps = {
   productList: NormalizedProduct[];
