@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import useSWR from 'swr';
 
@@ -32,15 +33,21 @@ function Home() {
   if (!response) return <h1>Loading . . .</h1>;
 
   return (
-    <StyledContainer>
-      <h1>Vending Machine</h1>
+    <>
+      <Head>
+        <title>Focus - Vending Machine</title>
+      </Head>
 
-      <StyledMachineWrapper>
-        {productList.map((product) => (
-          <Product key={product.id} {...product} />
-        ))}
-      </StyledMachineWrapper>
-    </StyledContainer>
+      <StyledContainer>
+        <h1>Vending Machine</h1>
+
+        <StyledMachineWrapper>
+          {productList.map((product) => (
+            <Product key={product.id} {...product} />
+          ))}
+        </StyledMachineWrapper>
+      </StyledContainer>
+    </>
   );
 }
 
