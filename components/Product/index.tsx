@@ -22,14 +22,14 @@ function Product({ id, name, preparationTime, thumbnail }: ProductProps) {
     }, preparationTime * 1000);
 
     await message.loading({
-      content: `Preparing ${name} . . .`,
+      content: `Preparing ${name}`,
       duration: preparationTime,
       key: id,
     });
 
     await message.success({
-      content: `Your ${name} is Ready to Go!`,
-      duration: 1,
+      content: `Your ${name} is/are Ready to Go!`,
+      duration: 2,
       key: id,
     });
   };
