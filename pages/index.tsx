@@ -2,9 +2,9 @@ import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import useSWR from 'swr';
 
-import Product from 'components/Product';
+import VendingMachine from 'components/VendingMachine';
 
-import { StyledContainer, StyledMachineWrapper } from 'theme/shared';
+import { StyledContainer } from 'theme/shared';
 
 import { NormalizedProduct } from 'typings/product';
 import { APIResponse } from 'typings/shared';
@@ -28,9 +28,27 @@ function Home() {
     setProductList(normalizedProductList);
   }, [response?.data]);
 
-  if (error) return <h1>{error.message}</h1>;
+  if (error)
+    return (
+      <>
+        <Head>
+          <title>Focus - Vending Machine</title>
+        </Head>
 
-  if (!response) return <h1>Loading . . .</h1>;
+        <h1>{error.message}</h1>
+      </>
+    );
+
+  if (!response)
+    return (
+      <>
+        <Head>
+          <title>Focus - Vending Machine</title>
+        </Head>
+
+        <h1>Loading . . .</h1>
+      </>
+    );
 
   return (
     <>
@@ -41,11 +59,7 @@ function Home() {
       <StyledContainer>
         <h1>Vending Machine</h1>
 
-        <StyledMachineWrapper>
-          {productList.map((product) => (
-            <Product key={product.id} {...product} />
-          ))}
-        </StyledMachineWrapper>
+        <VendingMachine productList={productList} />
       </StyledContainer>
     </>
   );
