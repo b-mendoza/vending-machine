@@ -40,25 +40,6 @@ function Home() {
       </>
     );
 
-  if (!response)
-    return (
-      <>
-        <Head>
-          <title>Focus - Vending Machine</title>
-        </Head>
-
-        <StyledContainer>
-          <h1>Vending Machine</h1>
-
-          <StyledMachineWrapper>
-            {new Array<null>(8).fill(null).map((_, index) => (
-              <SkeletonProduct key={index} />
-            ))}
-          </StyledMachineWrapper>
-        </StyledContainer>
-      </>
-    );
-
   return (
     <>
       <Head>
@@ -68,7 +49,15 @@ function Home() {
       <StyledContainer>
         <h1>Vending Machine</h1>
 
-        <VendingMachine productList={productList} />
+        {!response ? (
+          <StyledMachineWrapper>
+            {new Array<null>(8).fill(null).map((_, index) => (
+              <SkeletonProduct key={index} />
+            ))}
+          </StyledMachineWrapper>
+        ) : (
+          <VendingMachine productList={productList} />
+        )}
       </StyledContainer>
     </>
   );
