@@ -20,16 +20,26 @@ function Product({
     initialState: false,
   });
 
-  const handlePrepare = () => {
-    if (onPrepare && typeof onPrepare === 'function') {
-      setIsBeingPrepared.setTrue();
+  const handlePrepare = async () => {
+    const message = (await import('antd/lib/message')).default;
 
-      setTimeout(() => {
-        setIsBeingPrepared.setFalse();
-      }, preparationTime * 1000);
+    setIsBeingPrepared.setTrue();
 
-      onPrepare(id);
-    }
+    setTimeout(() => {
+      setIsBeingPrepared.setFalse();
+    }, preparationTime * 1000);
+
+    await message.loading({
+      content: `Preparing ${name} . . .`,
+      duration: preparationTime,
+      key: id,
+    });
+
+    await message.success({
+      content: `Your ${name} is Ready to Go!`,
+      duration: 1,
+      key: id,
+    });
   };
 
   return (
