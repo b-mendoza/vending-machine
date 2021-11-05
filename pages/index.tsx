@@ -31,17 +31,13 @@ function Home() {
 
   if (!response) return <h1>Loading . . .</h1>;
 
-  const handlePrepare = (productId: string) => {
-    console.log({ productId });
-  };
-
   return (
     <StyledContainer>
       <h1>Vending Machine</h1>
 
       <StyledMachineWrapper>
         {productList.map((product) => (
-          <Product key={product.id} {...product} onPrepare={handlePrepare} />
+          <Product key={product.id} {...product} />
         ))}
       </StyledMachineWrapper>
     </StyledContainer>
