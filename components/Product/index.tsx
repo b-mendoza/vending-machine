@@ -5,17 +5,9 @@ import { useBoolean } from 'hooks/useBoolean';
 
 import { NormalizedProduct } from 'typings/product';
 
-type ProductProps = NormalizedProduct & {
-  onPrepare?: (productId: string) => void;
-};
+type ProductProps = NormalizedProduct;
 
-function Product({
-  id,
-  name,
-  preparationTime,
-  thumbnail,
-  onPrepare,
-}: ProductProps) {
+function Product({ id, name, preparationTime, thumbnail }: ProductProps) {
   const [isBeingPrepared, setIsBeingPrepared] = useBoolean({
     initialState: false,
   });
