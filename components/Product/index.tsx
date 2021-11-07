@@ -52,9 +52,10 @@ function Product({ id, name, preparationTime, thumbnail }: ProductProps) {
         alt={name}
         height={240}
         layout="responsive"
-        objectFit="contain"
+        objectFit="scale-down"
         priority
         src={thumbnail}
+        title={name}
         width={240}
       />
 
