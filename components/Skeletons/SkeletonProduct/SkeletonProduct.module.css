@@ -1,3 +1,15 @@
-.avatarElement {
+.skeleton {
+  height: fit-content;
+
   width: 100%;
+}
+
+.image__skeleton {
+  display: block;
+
+  min-height: 24rem;
+  height: auto;
+
+  min-width: 24rem;
+  width: 100% !important;
 }
