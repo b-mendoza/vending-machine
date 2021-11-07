@@ -1,9 +1,17 @@
-import { Button } from 'antd';
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
 
 import { useBoolean } from 'hooks/useBoolean';
 
 import { NormalizedProduct } from 'typings/product';
+
+const LazyButton = dynamic(() => import('antd/lib/button'), {
+  loading: () => <div />,
+});
+
+const LazyText = dynamic(() => import('antd/lib/typography/Text'), {
+  loading: () => <div />,
+});
 
 type ProductProps = NormalizedProduct;
 
@@ -46,9 +54,15 @@ function Product({ id, name, preparationTime, thumbnail }: ProductProps) {
         width={240}
       />
 
-      <Button block loading={isBeingPrepared} onClick={handlePrepare}>
-        {name}
-      </Button>
+      <LazyButton
+        aria-disabled={isBeingPrepared}
+        block
+        loading={isBeingPrepared}
+        title={`Prepare ${name}`}
+        onClick={handlePrepare}
+      >
+        <LazyText ellipsis>Prepare {name}</LazyText>
+      </LazyButton>
     </article>
   );
 }
