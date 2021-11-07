@@ -5,8 +5,9 @@ import styles from './SkeletonProduct.module.css';
 const { Avatar } = Skeleton;
 
 const avatarStyles: React.CSSProperties = {
-  height: '27rem',
-  minWidth: '27rem',
+  minHeight: '24rem',
+  height: 'inherit',
+  minWidth: '24rem',
   width: 'inherit',
 };
 
