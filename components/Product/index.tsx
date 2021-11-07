@@ -21,25 +21,29 @@ function Product({ id, name, preparationTime, thumbnail }: ProductProps) {
   });
 
   const handlePrepare = async () => {
-    const message = (await import('antd/lib/message')).default;
+    try {
+      const { default: message } = await import('antd/lib/message');
 
-    setIsBeingPrepared.setTrue();
+      setIsBeingPrepared.setTrue();
 
-    setTimeout(() => {
-      setIsBeingPrepared.setFalse();
-    }, preparationTime * 1000);
+      setTimeout(() => {
+        setIsBeingPrepared.setFalse();
+      }, preparationTime * 1000);
 
-    await message.loading({
-      content: `Preparing ${name}`,
-      duration: preparationTime,
-      key: id,
-    });
+      await message.loading({
+        content: `Preparing ${name}`,
+        duration: preparationTime,
+        key: id,
+      });
 
-    await message.success({
-      content: `Your ${name} is/are Ready to Go!`,
-      duration: 2,
-      key: id,
-    });
+      await message.success({
+        content: `Your ${name} is/are Ready to Go!`,
+        duration: 2,
+        key: id,
+      });
+    } catch {
+      console.log('__ERROR__', 'Loading Message module');
+    }
   };
 
   return (
