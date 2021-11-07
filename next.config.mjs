@@ -2,7 +2,7 @@
  * @type {import('next').NextConfig}
  */
 
-module.exports = {
+const nextJSConfig = {
   env: {
     API_URL: 'https://vending-machine-test.vercel.app/api/products',
   },
@@ -26,3 +26,5 @@ module.exports = {
   },
   reactStrictMode: true,
 };
+
+export default nextJSConfig;
