@@ -1,16 +1,14 @@
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 
+import SkeletonButton from 'components/Skeletons/SkeletonButton';
+
 import { useBoolean } from 'hooks/useBoolean';
 
 import { NormalizedProduct } from 'typings/product';
 
-const loadingDivStyles: React.CSSProperties = {
-  height: '3.2rem',
-};
-
 const LazyButton = dynamic(() => import('antd/lib/button'), {
-  loading: () => <div style={loadingDivStyles} />,
+  loading: () => <SkeletonButton />,
 });
 
 const LazyText = dynamic(() => import('antd/lib/typography/Text'), {
