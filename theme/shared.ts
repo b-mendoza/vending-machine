@@ -7,7 +7,7 @@ export const StyledContainer = styled.main`
 
   margin: 0 auto;
 
-  max-width: 120rem;
+  max-width: 140rem;
 
   @media (min-width: ${Breakpoints.MobileBreakpoint}) {
     padding: 3rem;
