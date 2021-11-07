@@ -5,8 +5,12 @@ import { useBoolean } from 'hooks/useBoolean';
 
 import { NormalizedProduct } from 'typings/product';
 
+const loadingDivStyles: React.CSSProperties = {
+  height: '3.2rem',
+};
+
 const LazyButton = dynamic(() => import('antd/lib/button'), {
-  loading: () => <div />,
+  loading: () => <div style={loadingDivStyles} />,
 });
 
 const LazyText = dynamic(() => import('antd/lib/typography/Text'), {
