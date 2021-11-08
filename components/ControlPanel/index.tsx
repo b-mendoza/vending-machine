@@ -14,11 +14,13 @@ type ControlPanelProps = {
 };
 
 const columns: ColumnsType<ProductData> = [
-  { dataIndex: 'name', title: 'Name' },
-  { dataIndex: 'count', title: 'Count' },
-  { dataIndex: 'preparationTime', title: 'Preparation Time' },
+  { dataIndex: 'name', ellipsis: true, title: 'Name' },
+  { dataIndex: 'count', ellipsis: true, title: 'Count' },
+  { dataIndex: 'preparationTime', ellipsis: true, title: 'Preparation Time' },
+  { dataIndex: 'price', ellipsis: true, title: 'Price' },
   {
     dataIndex: 'status',
+    ellipsis: true,
     title: 'Status',
     render: (status: ProductData['status']) => (
       <LazyText type={status === 'PREPARING' ? 'danger' : 'success'}>
