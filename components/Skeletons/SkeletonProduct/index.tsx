@@ -6,7 +6,7 @@ import styles from './SkeletonProduct.module.css';
 
 function SkeletonProduct() {
   return (
-    <article className={styles.skeleton} data-testid="skeletonProduct">
+    <article data-testid="skeletonProduct">
       <Skeleton.Image className={styles.image__skeleton} />
 
       <SkeletonButton />
