@@ -1,14 +1,29 @@
+import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import useSWR from 'swr';
 
+import Product from 'components/Product';
 import SkeletonProduct from 'components/Skeletons/SkeletonProduct';
-import VendingMachine from 'components/VendingMachine';
 
-import { StyledContainer, StyledMachineWrapper } from 'theme/shared';
+import {
+  StyledContainer,
+  StyledControlPanel,
+  StyledMachineWrapper,
+} from 'theme/shared';
 
 import { NormalizedProduct } from 'typings/product';
 import { APIResponse } from 'typings/shared';
+
+const LazyButton = dynamic(() => import('antd/lib/button'));
+
+const LazyResult = dynamic(() => import('antd/lib/result'));
+
+const PAGE_DATA = {
+  errorTitle: 'Focus - Something Went Wrong',
+  heading: 'Vending Machine',
+  title: 'Focus - Vending Machine',
+};
 
 function Home() {
   const { data: response, error } = useSWR<APIResponse, Error>(
@@ -29,35 +44,53 @@ function Home() {
     setProductList(normalizedProductList);
   }, [response?.data]);
 
-  if (error)
+  if (error) {
+    const handleReload = () => {
+      window.location.reload();
+    };
+
     return (
       <>
         <Head>
-          <title>Focus - Vending Machine</title>
+          <title>{PAGE_DATA.errorTitle}</title>
         </Head>
 
-        <h1>{error.message}</h1>
+        <StyledContainer centerContent>
+          <LazyResult
+            status="500"
+            subTitle="SOMETHING WENT WRONG"
+            title="Network Error"
+            extra={<LazyButton onClick={handleReload}>Try Again</LazyButton>}
+          />
+        </StyledContainer>
       </>
     );
+  }
 
   return (
     <>
       <Head>
-        <title>Focus - Vending Machine</title>
+        <title>{PAGE_DATA.title}</title>
       </Head>
 
       <StyledContainer>
-        <h1>Vending Machine</h1>
+        <h1>{PAGE_DATA.heading}</h1>
 
-        {!response ? (
-          <StyledMachineWrapper>
-            {new Array<null>(8).fill(null).map((_, index) => (
-              <SkeletonProduct key={index} />
-            ))}
-          </StyledMachineWrapper>
-        ) : (
-          <VendingMachine productList={productList} />
-        )}
+        <StyledMachineWrapper>
+          {!response ? (
+            new Array<null>(8)
+              .fill(null)
+              .map((_, index) => <SkeletonProduct key={index} />)
+          ) : (
+            <>
+              {productList.map((product) => (
+                <Product key={product.id} {...product} />
+              ))}
+
+              <StyledControlPanel />
+            </>
+          )}
+        </StyledMachineWrapper>
       </StyledContainer>
     </>
   );
