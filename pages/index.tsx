@@ -12,10 +12,18 @@ import {
   StyledMachineWrapper,
 } from 'theme/shared';
 
-import { NormalizedProduct } from 'typings/product';
+import { NormalizedProduct, ProductData } from 'typings/product';
 import { APIResponse } from 'typings/shared';
 
+const loadingControlPanelStyles: React.CSSProperties = {
+  height: '23rem',
+};
+
 const LazyButton = dynamic(() => import('antd/lib/button'));
+
+const LazyControlPanel = dynamic(() => import('components/ControlPanel'), {
+  loading: () => <div style={loadingControlPanelStyles} />,
+});
 
 const LazyResult = dynamic(() => import('antd/lib/result'), {
   loading: ({ error }) =>
@@ -38,6 +46,8 @@ function Home() {
   const { data: response, error } = useSWR<APIResponse, Error>(
     process.env.API_URL,
   );
+
+  const [panelData, setPanelData] = useState<ProductData[]>([]);
 
   const [productList, setProductList] = useState<NormalizedProduct[]>([]);
 
@@ -141,11 +151,9 @@ function Home() {
         </StyledMachineWrapper>
       </StyledContainer>
 
-      {response ? (
-        <StyledControlPanel>
-          <p>Control Panel</p>
-        </StyledControlPanel>
-      ) : null}
+      <StyledControlPanel>
+        <LazyControlPanel dataSource={panelData} isLoading={!response} />
+      </StyledControlPanel>
     </>
   );
 }
