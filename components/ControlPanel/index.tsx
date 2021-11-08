@@ -2,6 +2,8 @@ import { Table } from 'antd';
 import type { ColumnsType } from 'antd/lib/table';
 import dynamic from 'next/dynamic';
 
+import Counter from 'components/Counter';
+
 import { ProductData } from 'typings/product';
 
 const LazyText = dynamic(() => import('antd/lib/typography/Text'), {
@@ -16,8 +18,22 @@ type ControlPanelProps = {
 const columns: ColumnsType<ProductData> = [
   { dataIndex: 'name', ellipsis: true, title: 'Name' },
   { dataIndex: 'count', ellipsis: true, title: 'Count' },
-  { dataIndex: 'preparationTime', ellipsis: true, title: 'Preparation Time' },
-  { dataIndex: 'price', ellipsis: true, title: 'Price' },
+  {
+    dataIndex: 'timeToBePrepared',
+    ellipsis: true,
+    title: 'Time to be Prepared',
+    render: (preparationTime: number, rowData) => {
+      const { status } = rowData;
+
+      return status === 'PREPARING' ? (
+        <>
+          <Counter initialCount={preparationTime} /> second(s)
+        </>
+      ) : (
+        'N/A'
+      );
+    },
+  },
   {
     dataIndex: 'status',
     ellipsis: true,
