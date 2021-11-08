@@ -33,7 +33,7 @@ export const StyledControlPanel = styled.section`
   ${layoutSizeReset}
   ${paddingReset}
 
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: white;
 
   bottom: 0;
 
