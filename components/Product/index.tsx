@@ -34,7 +34,15 @@ function Product({
 
   const handlePrepare = async () => {
     try {
-      const { default: message } = await import('antd/lib/message');
+      const { default: notification } = await import('antd/lib/notification');
+
+      notification.config({ duration: 2 });
+
+      notification.info({
+        key: id,
+        message: `Preparing ${name}`,
+        placement: 'topLeft',
+      });
 
       setIsBeingPrepared.setTrue();
 
@@ -43,22 +51,16 @@ function Product({
       setTimeout(() => {
         if (onFinishPreparing) onFinishPreparing(id);
 
+        notification.success({
+          key: id,
+          message: `Your ${name} have been dispatched`,
+          placement: 'topRight',
+        });
+
         setIsBeingPrepared.setFalse();
       }, preparationTime * 1000);
-
-      await message.loading({
-        content: `Preparing ${name}`,
-        duration: preparationTime,
-        key: id,
-      });
-
-      await message.success({
-        content: `Your ${name} is/are Ready to Go!`,
-        duration: 2,
-        key: id,
-      });
     } catch {
-      console.log('__ERROR__', 'Loading Message module');
+      console.log('__ERROR__', 'Loading Notification module');
     }
   };
 
