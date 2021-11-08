@@ -97,7 +97,11 @@ function Home() {
       setPanelData((prevState) =>
         prevState.map((product) =>
           product.key === productId
-            ? { ...product, count: product.count + 1, status: 'PREPARING' }
+            ? {
+                ...product,
+                status: 'PREPARING',
+                timesDispatched: product.timesDispatched + 1,
+              }
             : product,
         ),
       );
@@ -108,10 +112,10 @@ function Home() {
     const { id, name, preparationTime } = selectedProduct;
 
     const productToAdd: ProductData = {
-      count: 1,
       key: id,
       name,
       status: 'PREPARING',
+      timesDispatched: 1,
       timeToBePrepared: preparationTime,
     };
 

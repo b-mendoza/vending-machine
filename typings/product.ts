@@ -10,9 +10,9 @@ export type Product = {
 };
 
 export type ProductData = {
-  count: number;
   key: string;
   name: string;
   status: 'PREPARING' | 'READY';
+  timesDispatched: number;
   timeToBePrepared: number;
 };
