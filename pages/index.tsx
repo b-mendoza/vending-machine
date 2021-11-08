@@ -111,11 +111,11 @@ function Home() {
       count: 1,
       key: id,
       name,
-      preparationTime: `${preparationTime} seconds`,
       status: 'PREPARING',
+      timeToBePrepared: preparationTime,
     };
 
-    setPanelData((prevState) => [...prevState, productToAdd]);
+    setPanelData((prevState) => [productToAdd, ...prevState]);
   };
 
   const handleFinishPreparing = (productId: string) => {

@@ -13,6 +13,6 @@ export type ProductData = {
   count: number;
   key: string;
   name: string;
-  preparationTime: string;
   status: 'PREPARING' | 'READY';
+  timeToBePrepared: number;
 };
