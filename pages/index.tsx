@@ -76,6 +76,46 @@ function Home() {
     );
   }
 
+  const handleStartPreparing = (productId: string) => {
+    const selectedProduct = productList.find(
+      (product) => product.id === productId,
+    );
+
+    if (!selectedProduct) return;
+
+    if (panelData.some((product) => product.key === productId)) {
+      setPanelData((prevState) =>
+        prevState.map((product) =>
+          product.key === productId
+            ? { ...product, count: product.count + 1, status: 'PREPARING' }
+            : product,
+        ),
+      );
+
+      return;
+    }
+
+    const { id, name, preparationTime } = selectedProduct;
+
+    const productToAdd: ProductData = {
+      count: 1,
+      key: id,
+      name,
+      preparationTime: `${preparationTime} seconds`,
+      status: 'PREPARING',
+    };
+
+    setPanelData((prevState) => [...prevState, productToAdd]);
+  };
+
+  const handleFinishPreparing = (productId: string) => {
+    setPanelData((prevState) =>
+      prevState.map((product) =>
+        product.key === productId ? { ...product, status: 'READY' } : product,
+      ),
+    );
+  };
+
   return (
     <>
       <Head>
@@ -91,7 +131,12 @@ function Home() {
                 .fill(null)
                 .map((_, index) => <SkeletonProduct key={index} />)
             : productList.map((product) => (
-                <Product key={product.id} {...product} />
+                <Product
+                  key={product.id}
+                  onFinishPreparing={handleFinishPreparing}
+                  onStartPreparing={handleStartPreparing}
+                  {...product}
+                />
               ))}
         </StyledMachineWrapper>
       </StyledContainer>
