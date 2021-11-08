@@ -17,17 +17,17 @@ type ControlPanelProps = {
 
 const columns: ColumnsType<ProductData> = [
   { dataIndex: 'name', ellipsis: true, title: 'Name' },
-  { dataIndex: 'count', ellipsis: true, title: 'Count' },
+  { dataIndex: 'timesDispatched', ellipsis: true, title: 'Times Dispatched' },
   {
     dataIndex: 'timeToBePrepared',
     ellipsis: true,
     title: 'Time to be Prepared',
-    render: (preparationTime: number, rowData) => {
+    render: (timeToBePrepared: number, rowData) => {
       const { status } = rowData;
 
       return status === 'PREPARING' ? (
         <>
-          <Counter initialCount={preparationTime} /> second(s)
+          <Counter initialCount={timeToBePrepared} /> second(s)
         </>
       ) : (
         'N/A'
