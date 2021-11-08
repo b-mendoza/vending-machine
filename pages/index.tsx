@@ -17,7 +17,15 @@ import { APIResponse } from 'typings/shared';
 
 const LazyButton = dynamic(() => import('antd/lib/button'));
 
-const LazyResult = dynamic(() => import('antd/lib/result'));
+const LazyResult = dynamic(() => import('antd/lib/result'), {
+  loading: ({ error }) =>
+    error ? (
+      <>
+        <h1>500 Network Error</h1>
+        <p>😢 WE WERE NOT ABLE TO LOAD YOUR DATA</p>
+      </>
+    ) : null,
+});
 
 const PAGE_DATA = {
   errorTitle: 'Focus - Something Went Wrong',

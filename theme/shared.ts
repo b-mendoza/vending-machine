@@ -19,6 +19,7 @@ export const StyledContainer = styled.main<StyledContainerProps>`
           display: 'grid',
           height: '100vh',
           placeContent: 'center',
+          textAlign: 'center',
         }
       : null}
 
