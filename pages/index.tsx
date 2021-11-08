@@ -22,6 +22,7 @@ const LazyResult = dynamic(() => import('antd/lib/result'), {
     error ? (
       <>
         <h1>500 Network Error</h1>
+
         <p>😢 WE WERE NOT ABLE TO LOAD YOUR DATA</p>
       </>
     ) : null,
@@ -65,10 +66,10 @@ function Home() {
 
         <StyledContainer centerContent>
           <LazyResult
+            extra={<LazyButton onClick={handleReload}>Try Again</LazyButton>}
             status="500"
             subTitle="SOMETHING WENT WRONG"
             title="Network Error"
-            extra={<LazyButton onClick={handleReload}>Try Again</LazyButton>}
           />
         </StyledContainer>
       </>
