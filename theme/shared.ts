@@ -37,8 +37,6 @@ export const StyledControlPanel = styled.section`
 
   bottom: 0;
 
-  height: 15vh;
-
   left: 0;
 
   position: sticky;
