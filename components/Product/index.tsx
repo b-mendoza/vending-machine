@@ -55,7 +55,6 @@ function Product({ id, name, preparationTime, thumbnail }: ProductProps) {
         height={240}
         layout="responsive"
         objectFit="scale-down"
-        priority
         src={thumbnail}
         title={name}
         width={240}
