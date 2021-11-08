@@ -86,21 +86,21 @@ function Home() {
         <h1>{PAGE_DATA.heading}</h1>
 
         <StyledMachineWrapper>
-          {!response ? (
-            new Array<null>(8)
-              .fill(null)
-              .map((_, index) => <SkeletonProduct key={index} />)
-          ) : (
-            <>
-              {productList.map((product) => (
+          {!response
+            ? new Array<null>(8)
+                .fill(null)
+                .map((_, index) => <SkeletonProduct key={index} />)
+            : productList.map((product) => (
                 <Product key={product.id} {...product} />
               ))}
-
-              <StyledControlPanel />
-            </>
-          )}
         </StyledMachineWrapper>
       </StyledContainer>
+
+      {response ? (
+        <StyledControlPanel>
+          <p>Control Panel</p>
+        </StyledControlPanel>
+      ) : null}
     </>
   );
 }

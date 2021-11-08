@@ -1,17 +1,14 @@
 import styled from '@emotion/styled';
 
-import { Breakpoints } from 'typings/shared';
+import { layoutSizeReset, paddingReset } from './resets';
 
 type StyledContainerProps = {
   centerContent?: boolean;
 };
 
 export const StyledContainer = styled.main<StyledContainerProps>`
-  padding: 2rem;
-
-  margin: 0 auto;
-
-  max-width: 140rem;
+  ${layoutSizeReset}
+  ${paddingReset}
 
   ${({ centerContent }) =>
     centerContent
@@ -22,10 +19,6 @@ export const StyledContainer = styled.main<StyledContainerProps>`
           textAlign: 'center',
         }
       : null}
-
-  @media (min-width: ${Breakpoints.MobileBreakpoint}) {
-    padding: 3rem;
-  }
 `;
 
 export const StyledMachineWrapper = styled.div`
@@ -36,4 +29,17 @@ export const StyledMachineWrapper = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(24rem, 1fr));
 `;
 
-export const StyledControlPanel = styled.section``;
+export const StyledControlPanel = styled.section`
+  ${layoutSizeReset}
+  ${paddingReset}
+
+  background-color: rgba(255, 255, 255, 0.9);
+
+  bottom: 0;
+
+  height: 15vh;
+
+  left: 0;
+
+  position: sticky;
+`;
