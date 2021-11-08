@@ -15,9 +15,19 @@ const LazyText = dynamic(() => import('antd/lib/typography/Text'), {
   loading: () => <div />,
 });
 
-type ProductProps = NormalizedProduct;
+type ProductProps = NormalizedProduct & {
+  onFinishPreparing?: (productId: string) => void;
+  onStartPreparing?: (productId: string) => void;
+};
 
-function Product({ id, name, preparationTime, thumbnail }: ProductProps) {
+function Product({
+  id,
+  name,
+  preparationTime,
+  thumbnail,
+  onFinishPreparing,
+  onStartPreparing,
+}: ProductProps) {
   const [isBeingPrepared, setIsBeingPrepared] = useBoolean({
     initialState: false,
   });
@@ -28,7 +38,11 @@ function Product({ id, name, preparationTime, thumbnail }: ProductProps) {
 
       setIsBeingPrepared.setTrue();
 
+      if (onStartPreparing) onStartPreparing(id);
+
       setTimeout(() => {
+        if (onFinishPreparing) onFinishPreparing(id);
+
         setIsBeingPrepared.setFalse();
       }, preparationTime * 1000);
 
