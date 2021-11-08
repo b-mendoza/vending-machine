@@ -8,3 +8,11 @@ export type Product = {
   preparation_time: number;
   thumbnail: string;
 };
+
+export type ProductData = {
+  count: number;
+  key: string;
+  name: string;
+  preparationTime: string;
+  status: 'PREPARING' | 'READY';
+};
